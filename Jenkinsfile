@@ -1,22 +1,19 @@
-pipeline {
+pipeline{
     agent any
-    
     environment {
-        PATH = "/usr/bin:$PATH" // Add /usr/bin to the beginning of the PATH
+        PATH = "$PATH:/opt/apache-maven-3.6.3/bin"
     }
-    
-    stages {
-        stage('GetCode') {
-            steps {
-                git branch: 'main',
-                url: 'https://github.com/shushinz/MavenWebApp.git'
+    stages{
+       stage('GetCode'){
+            steps{
+				git branch: 'main',
+                url: 'https://github.com/ashokitschool/maven_web_app_jenkins_pipeline.git'
             }
-        }
-        
-        stage('Build') {
-            steps {
+         }        
+       stage('Build'){
+            steps{
                 sh 'mvn clean package'
             }
-        }
+         }       
     }
 }
